@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas Ya | Créditos Digitales</title>
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        body { background-color: #f3f4f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md p-4">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">Finanzas<span class="text-gray-800">Ya</span></h1>
+            <span class="text-sm bg-green-100 text-green-800 font-semibold px-3 py-1 rounded-full">● Operando 100% Online</span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="max-w-5xl mx-auto my-10 p-6 bg-white rounded-2xl shadow-xl grid md:grid-cols-2 gap-8 items-center">
+        <div>
+            <h2 class="text-4xl font-extrabold text-gray-900 leading-tight mb-4">El empujón financiero que necesitas, sin moverte de casa.</h2>
+            <p class="text-gray-600 text-lg mb-6">Préstamos rápidos con la tasa más baja del mercado, aprobación en 24hs y firma 100% digital desde tu celular.</p>
+            <ul class="space-y-3 mb-6">
+                <li class="flex items-center text-gray-700">✅ Tasas menores que cualquier banco o financiera.</li>
+                <li class="flex items-center text-gray-700">✅ Plazos flexibles hasta en 12 cuotas fijas.</li>
+                <li class="flex items-center text-gray-700">✅ Desembolso inmediato por transferencia.</li>
+            </ul>
+        </div>
+        
+        <!-- Simulador de Préstamo Funcional -->
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Simula tu Crédito</h3>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-1 flex justify-between">
+                    <span>Monto a solicitar:</span>
+                    <span id="monto-val" class="text-blue-600 font-bold">\$50,000</span>
+                </label>
+                <input type="range" id="monto" min="10000" max="300000" step="5000" value="50000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-1 flex justify-between">
+                    <span>Plazo de devolución:</span>
+                    <span id="cuotas-val" class="text-blue-600 font-bold">6 meses</span>
+                </label>
+                <input type="range" id="cuotas" min="3" max="12" step="1" value="6" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+
+            <div class="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                    <span>Pago mensual estimado:</span>
+                </div>
+                <div class="text-3xl font-black text-blue-700" id="cuota-estimada">\$11,500</div>
+                <p class="text-xs text-gray-500 mt-1">*Sujeto a evaluación crediticia interna.</p>
+            </div>
+
+            <!-- ENLACE AL FORMULARIO DE CAPTACIÓN -->
+            <a href="https://TU_LINK_DE_GOOGLE_FORMS_O_TYPEFORM_AQUI" target="_blank" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl transition shadow-lg">
+                Iniciar Solicitud Online 🚀
+            </a>
+        </div>
+    </header>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-gray-500 text-sm">
+        &copy; 2026 Finanzas Ya. Privacidad y Seguridad Garantizada.
+    </footer>
+
+    <!-- Lógica del simulador (Tasa estimada baja) -->
+    <script>
+        const montoInput = document.getElementById('monto');
+        const cuotasInput = document.getElementById('cuotas');
+        const montoVal = document.getElementById('monto-val');
+        const cuotasVal = document.getElementById('cuotas-val');
+        const cuotaEstimada = document.getElementById('cuota-estimada');
+
+        // Tasa de interés mensual simulada (puedes ajustarla según tu modelo)
+        const TASA_MENSUAL = 0.05; 
+
+        function calcularCuota() {
+            const P = parseFloat(montoInput.value);
+            const n = parseInt(cuotasInput.value);
+            
+            montoVal.innerText = `$${P.toLocaleString('es-AR')}`;
+            cuotasVal.innerText = `${n} meses`;
+
+            // Fórmula de amortización constante (Cuota fija)
+            const cuota = (P * TASA_MENSUAL) / (1 - Math.pow(1 + TASA_MENSUAL, -n));
+            cuotaEstimada.innerText = `$${Math.round(cuota).toLocaleString('es-AR')}`;
+        }
+
+        montoInput.addEventListener('input', calcularCuota);
+        cuotasInput.addEventListener('input', calcularCuota);
+        window.onload = calcularCuota;
+    </script>
+</body>
+</html>
